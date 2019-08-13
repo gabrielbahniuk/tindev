@@ -1,2 +1,0 @@
-# tindev
-Tinder for developers
