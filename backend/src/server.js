@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -17,9 +18,10 @@ io.on('connection', socket => {
 });
 
 mongoose.connect(
-  'mongodb+srv://tindev:vpPyOn5TNMZJLbJE@cluster0-4bygp.mongodb.net/tindev?retryWrites=true&w=majority',
+  `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
   {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
   }
 );
 
@@ -33,4 +35,4 @@ app.use(cors());
 app.use(express.json());
 app.use(routes);
 
-server.listen(3333);
+server.listen(process.env.APP_PORT || 3333);
