@@ -14,7 +14,7 @@ export default function Main({ navigation }) {
   const id = navigation.getParam('user');
   const [users, setUsers] = useState([]);
   const [matchDev, setMatchDev] = useState(null);
-  
+
   useEffect(() => {
     async function loadUsers() {
       const response = await api.get('/devs', {
@@ -27,7 +27,7 @@ export default function Main({ navigation }) {
     }
 
     loadUsers();
-  }, [id]);
+  }, [users, id]);
 
   useEffect(() => {
     const socket = io(Config.API_URL, {
@@ -73,7 +73,7 @@ export default function Main({ navigation }) {
 
       <View style={styles.cardsContainer}>
         { users.length === 0
-          ? <Text style={styles.empty}>Acabou :(</Text>
+          ? <Text style={styles.empty}>Game over :(</Text>
           : (
             users.map((user, index) => (
               <View key={user._id} style={[styles.card, { zIndex: users.length - index }]}>
@@ -107,7 +107,7 @@ export default function Main({ navigation }) {
           <Text style={styles.matchBio}>{matchDev.bio}</Text>
 
           <TouchableOpacity onPress={() => setMatchDev(null)}>
-            <Text style={styles.closeMatch}>FECHAR</Text>
+            <Text style={styles.closeMatch}>CLOSE</Text>
           </TouchableOpacity>
         </View>
       ) }

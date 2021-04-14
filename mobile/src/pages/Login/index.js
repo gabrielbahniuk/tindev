@@ -28,14 +28,14 @@ export default function Login({ navigation }) {
   }
 
   return (
-    <KeyboardAvoidingView 
+    <KeyboardAvoidingView
       behavior="padding"
       enabled={Platform.OS === 'ios'}
       style={styles.container}
     >
       <Image source={logo} />
 
-      <TextInput 
+      <TextInput
         autoCapitalize="none"
         autoCorrect={false}
         placeholder="Inform your Github username..."
@@ -46,7 +46,7 @@ export default function Login({ navigation }) {
       />
 
       <TouchableOpacity onPress={handleLogin} style={styles.button}>
-        <Text style={styles.buttonText}>Submit</Text>
+        <Text style={styles.buttonText}>Send</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );
