@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 
 export default function Main({ match, bgColor }) {
   const [users, setUsers] = useState([]);
-  const [matchDev, setMatchDev] = useState(null);
+  const [matchDev, setMatchDev] = useState(false);
 
   useEffect(() => {
     async function loadUsers() {
@@ -29,11 +29,13 @@ export default function Main({ match, bgColor }) {
       setUsers(response.data);
     }
     loadUsers();
-  }, [match.params.id]);
+  }, [users, match.params.id]);
 
   useEffect(() => {
     const socket = io(process.env.REACT_APP_API_URL, {
-      query: { user: match.params.id }
+      query: {
+        user: match.params.id
+      }
     });
 
     socket.on('match', dev => {
