@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -16,9 +17,10 @@ io.on('connection', socket => {
   const { user } = socket.handshake.query;
   connectedUsers[user] = socket.id;
 });
+console.log(process.env)
 
 mongoose.connect(
-  `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
+  process.env.MONGO_URL,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
