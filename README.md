@@ -33,9 +33,7 @@
 $ cd backend
 
 # set required environment variables
-$ echo 'DB_HOST=tindev-db-container' >> .env
-$ echo 'DB_PORT=27017' >> .env
-$ echo 'DB_NAME=admin' >> .env
+$ echo 'MONGO_URL=mongodb://tindev-db-container:27017/admin' >> .env
 $ echo 'APP_PORT=3333' >> .env
 
 # install dependencies
