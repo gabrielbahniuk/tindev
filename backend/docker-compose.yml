@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  tindev-db-api:
+    container_name: tindev-db-container
+    image: mongo:3
+    restart: always
+    volumes:
+      - ./data:/data/db
+    ports:
+      - 9001:27017
+  tindev-api:
+    container_name: tindev-api-container
+    image: node:12
+    working_dir: /usr/src/tindev-api
+    restart: always
+    command: bash -c "npm install && npm start"
+    volumes:
+      - ./src/:/usr/src/tindev-api/src/
+      - ./package.json:/usr/src/tindev-api/package.json
+    ports:
+      - 10334:3333
+    links:
+      - tindev-db-api
