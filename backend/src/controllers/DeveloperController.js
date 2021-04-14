@@ -17,13 +17,16 @@ module.exports = {
   },
   async store(req, res) {
     const { username } = req.body;
+
+    const existentUser = await Developer.findOne({ user: username });
+
+    if (existentUser) {
+      return res.json(existentUser);
+    }
+
     const response = await axios.get(
       `https://api.github.com/users/${username}`
     );
-
-    const existentUser = await Developer.findOne({ user: username });
-    if (existentUser) return res.json(existentUser);
-
     const { name, bio, avatar_url: avatar } = response.data;
 
     const developer = await Developer.create({
