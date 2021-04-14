@@ -14,6 +14,11 @@ services:
     working_dir: /usr/src/tindev-api
     restart: always
     command: bash -c "npm install && npm start"
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      APP_PORT: ${APP_PORT}
     volumes:
       - ./src/:/usr/src/tindev-api/src/
       - ./package.json:/usr/src/tindev-api/package.json
