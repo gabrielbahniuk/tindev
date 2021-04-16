@@ -17,7 +17,6 @@ io.on('connection', socket => {
   const { user } = socket.handshake.query;
   connectedUsers[user] = socket.id;
 });
-console.log(process.env)
 
 mongoose.connect(
   process.env.MONGO_URL,
